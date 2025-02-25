@@ -1,0 +1,102 @@
+ Having Been a Treasurer in the Past, I Help Goblins Deceive
+time limit per test2 seconds
+memory limit per test256 megabytes
+After completing the first quest, Akito left the starting cave. After a while, he stumbled upon a goblin village.
+
+Since Akito had nowhere to live, he wanted to find out the price of housing. It is well known that goblins write numbers as a string of characters '-' and '_', and the value represented by the string s
+ is the number of distinct subsequences∗
+ of the string s
+ that are equal to the string "-_-" (this is very similar to goblin faces).
+
+For example, the string s=
+"-_--_-" represents the number 6
+, as it has 6
+ subsequences "-_-":
+
+s1+s2+s3
+s1+s2+s4
+s1+s2+s6
+s1+s5+s6
+s3+s5+s6
+s4+s5+s6
+Initially, the goblins wrote a random string-number s
+ in response to Akito's question, but then they realized that they wanted to take as much gold as possible from the traveler. To do this, they ask you to rearrange the characters in the string s
+ so that the value of the number represented by the string s
+ is maximized.
+
+∗
+A subsequence of a string a
+ is a string b
+ that can be obtained by deleting several (possibly 0
+) characters from a
+. Subsequences are considered different if they are obtained by deleting different sets of indices.
+
+Input
+The first line contains the number t
+ (1≤t≤104
+) — the number of test cases.
+
+In the first line of each test case, there is one number n
+ (1≤n≤2⋅105
+) — the length of the string written by the goblins.
+
+In the second line of each test case, there is a string s
+ of length n
+, consisting only of characters '-' and '_' — the string written by the goblins.
+
+It is guaranteed that the sum of n
+ across all test cases does not exceed 2⋅105
+.
+
+Output
+For each test case, you need to output one number — the maximum number of subsequences equal to the string "-_-", if the characters in the string s
+ are optimally rearranged.
+
+
+
+
+
+
+
+
+
+
+
+My try
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t; // Number of test cases
+    while (t--) {
+        int n;
+        cin >> n; // Length of the string
+        string st;
+        cin >> st; // Input string
+
+        int dashCount = 0; // Count of '-'
+        int underscoreCount = 0; // Count of '_'
+
+        // Count the number of '-' and '_' in the string
+        for (int i = 0; i < n; i++) {
+            if (st[i] == '-') {
+                dashCount++;
+            } else if (st[i] == '_') {
+                underscoreCount++;
+            }
+        }
+
+        // Check if there are at least 2 '-' and 1 '_'
+        if (dashCount < 2 || underscoreCount < 1) {
+            cout << 0 << endl; // Not enough characters to form "-_-"
+        } else {
+            // Calculate the number of distinct subsequences "-_-"
+            long long result = (long long)dashCount * (dashCount - 1) / 2 * underscoreCount;
+            cout << result << endl;
+        }
+    }
+
+    return 0;
+}
